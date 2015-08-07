@@ -3,6 +3,7 @@ $HOME/.vimrc -- vim配置文件
 $HOME/.vim   -- vim插件目录    
 
 .vimrc     
+
     set nocompatible            "不要使用vi的键盘模式，而是vim自己的
     filetype on                 "侦测文件类型
     syntax on                   "语法高亮
