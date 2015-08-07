@@ -1,0 +1,11 @@
+deb ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty main restricted universe multiverse
+deb ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-security main restricted universe multiverse
+deb ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-updates main restricted universe multiverse
+deb ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-proposed main restricted universe multiverse
+deb ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-backports main restricted universe multiverse
+
+deb-src ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty main restricted universe multiverse
+deb-src ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-security main restricted universe multiverse
+deb-src ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src ftp://ftp.ustb.edu.cn/pub/ubuntu/ trusty-backports main restricted universe multiverse
