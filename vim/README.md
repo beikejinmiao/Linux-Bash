@@ -1,9 +1,8 @@
-自定义的vim配置,需将vim配置放在用户主目录下
-$HOME/.vimrc -- vim配置文件
-$HOME/.vim   -- vim插件目录
+自定义的vim配置,需将vim配置放在用户主目录下     
+$HOME/.vimrc -- vim配置文件    
+$HOME/.vim   -- vim插件目录    
 
-.vimrc
-
+.vimrc     
     set nocompatible            "不要使用vi的键盘模式，而是vim自己的
     filetype on                 "侦测文件类型
     syntax on                   "语法高亮
