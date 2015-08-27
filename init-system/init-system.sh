@@ -4,14 +4,17 @@
 #***
 
 ##detect the user logined
-user=$(id | awk -F '(' '{print $2}' | awk -F ')' '{print $1}')
-if [ "$user" != "root" ]; then 
-    echo "Please execute this shell under user of 'root'!"
-    echo "Now the user logined is '$user'"
-    exit 0
-fi
+#user=$(id | awk -F '(' '{print $2}' | awk -F ')' '{print $1}')
+#if [ "$user" != "root" ]; then 
+#    echo "Please execute this shell under user of 'root'!"
+#    echo "Now the user logined is '$user'"
+#    exit 0
+#fi
 
 ##ssh set
+echo "Add my secret key into ssh service."
+echo
+
 mkdir -p $HOME/.ssh
 cd $HOME/.ssh/
 if [ ! -e authorized_keys ]; then
@@ -21,6 +24,9 @@ echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0G0Y9KLGVZxR3BrcKCwv7HnBAW2z2nYPiurw/v
 
 
 ##vim set
+echo "Reset my vim's set."
+echo
+
 if [ ! -e $HOME/.vimrc ]; then
     touch $HOME/.vimrc
 fi
@@ -44,37 +50,50 @@ echo "map <F3> :NERDTreeToggle<CR>" >> $vimrc_path
 
 
 ##apt set
-if [ ! -d /etc/apt ]; then
-    mkdir -p /etc/apt
+echo "Would you want to alternate the apt's source of your system?"
+
+read -p "Input 'Y' or 'y' for yes, 'N' or 'n' for no: " yn
+if [ "${yn}" == "Y" -o "${yn}" == "y" ]; then
+    source_file="/etc/apt/sources.list"
+    
+    if [ -e ${source_file} -a  ! -w ${source_file} ]; then
+        echo "You have not the permission to wirte the $source_file"
+        echo "Pleace use 'sudo'."
+        exit 1
+    fi
+
+    if [ -e $source_file ]; then
+        mv $source_file $source_file".bak"
+    fi
+    touch $source_file
+    
+    
+    deb_url="ftp://ftp.ustb.edu.cn/pub/ubuntu/"
+    #get the ubuntu release name by  `lsb_release`
+    ubuntu_release_name=`lsb_release -a 2>&1 | grep 'Codename' | awk  '{print $2}'`
+    deb_url_head="deb $deb_url $ubuntu_release_name"
+    debsrc_url_head="deb-src $deb_url $ubuntu_release_name"
+    deb_url_end="main restricted universe multiverse"
+    source_type="security updates proposed backports"
+    
+    echo ${deb_url_head}" "${deb_url_end} > $source_file
+    for stype in $source_type
+    do
+        echo ${deb_url_head}"-"${stype}" "${deb_url_end} >> $source_file
+    done
+    
+    echo "" >> $source_file
+    echo ${debsrc_url_head}" "${deb_url_end} >> $source_file
+    for stype in $source_type
+    do
+        echo ${debsrc_url_head}"-"${stype}" "${deb_url_end} >> $source_file
+    done
 fi
-cd /etc/apt/
-source_filename="sources.list"
-if [ -e $source_filename ]; then
-    mv $source_filename $source_filename".bak"
-fi
-touch $source_filename
 
-
-deb_url="ftp://ftp.ustb.edu.cn/pub/ubuntu/"
-ubuntu_release_name="trusty"
-deb_url_head="deb $deb_url $ubuntu_release_name"
-debsrc_url_head="deb-src $deb_url $ubuntu_release_name"
-deb_url_end="main restricted universe multiverse"
-source_type="security updates proposed backports"
-
-echo ${deb_url_head}" "${deb_url_end} > $source_filename
-for stype in $source_type
-do
-    echo ${deb_url_head}"-"${stype}" "${deb_url_end} >> $source_filename
-done
-
-echo "" >> $source_filename
-echo ${debsrc_url_head}" "${deb_url_end} >> $source_filename
-for stype in $source_type
-do
-    echo ${debsrc_url_head}"-"${stype}" "${deb_url_end} >> $source_filename
-done
-
+echo
+echo "Initialising the system end."
+echo "Now restart some system service."
 
 ##restart some services
-service ssh restart
+echo "***ssh"
+sudo service ssh restart
