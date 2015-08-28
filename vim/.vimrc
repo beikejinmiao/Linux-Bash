@@ -30,7 +30,7 @@ fun FileName()
         let len = line("$")
     endif
     exe "1," . len . "g#".info.".*#s#".info.".*#".info." ".expand("%")
-    "exe 1,5g/File Name      :.*/s/File Name      :.*/File Name      :".expand("%")
+    "exe 1,5g#File Name      :.*#s#File Name      :.*#File Name      :".expand("%")
 endfun
 
 
