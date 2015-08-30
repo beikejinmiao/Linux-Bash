@@ -10,7 +10,7 @@ url = 'http://202.204.48.66/'
 url_logout = 'http://202.204.48.66/F.htm'
 
 stuid = 's12345678'
-stupass = '123456'
+stupasswd = '123456'
 
 h_accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
 h_accept_encoding = 'gzip, deflate'
@@ -18,7 +18,7 @@ h_accept_language = 'zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4'
 h_cache_control = 'max-age=0'
 h_connection = 'keep-alive'
 h_content_type = 'application/x-www-form-urlencoded'
-h_cookie = 'myusername='+ stuid +'; pwd='+ stupass +'; username='+ stuid +'; smartdot='+ stupass
+h_cookie = 'myusername='+ stuid +'; pwd='+ stupasswd +'; username='+ stuid +'; smartdot='+ stupasswd
 h_host = '202.204.48.66'
 h_origin = 'http://202.204.48.66'
 h_referer = 'http://202.204.48.66/'
@@ -69,7 +69,7 @@ def prereq():
     
 
 def login():
-    data = {'DDDDD':stuid, 'upass':stupass, '0MKKey':'123456789', 'v6ip':''}
+    data = {'DDDDD':stuid, 'upass':stupasswd, '0MKKey':'123456789', 'v6ip':''}
     post_data = urllib.urlencode(data)
 
     try:
