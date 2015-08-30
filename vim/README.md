@@ -41,7 +41,7 @@ $HOME/.vim/template  -- 文件头模板目录
         else
             let len = line("$")
         endif
-        exe "1," . len . "g/".info.".*/s/".info.".*/".info." ".strftime("%Y-%m-%d %T")
+        exe "1," . len . "g#".info.".*#s#".info.".*#".info." ".strftime("%Y-%m-%d %T")
     endfun 
     #CreatedTime() 函数先检查文件是否少于 10 行，然后用 ":g" 命令查找包含 "Created Time   :" 的行。
     #在这些行上执行 ":s" 命令实现从已有的时间到当前时间的替换。
