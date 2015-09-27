@@ -2,6 +2,7 @@
 
 ## 目录
 * init-system     初始化系统相关脚本
+* service         系统服务自启动管理
 * vim             自定义VIM配置
 
 ## 脚本
