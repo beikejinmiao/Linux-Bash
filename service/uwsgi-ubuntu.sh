@@ -19,8 +19,11 @@ start() {
         echo "uwsgi start failed: uwsgi have started"; 
         return
     fi
-
-    #/usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals 1>/dev/null 2>&1 &
+    
+    # /usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals 1>/dev/null 2>&1 &
+    # if uwsgi.ini of project set  'master = true'
+    # it's better not to use the type of 'emperor'
+    
     ${DAEMON} --ini ${INIDIR}/${PROJECT1}.ini
 }
 
@@ -31,21 +34,17 @@ stop() {
         return
     fi
 
-    #kill -INT `cat $PIDFILE_LOGISTICS`
-    pid=`cat ${PIDFILE_LOGISTICS}`
-    kill -9 ${pid}
+    kill -INT `cat ${PIDFILE_LOGISTICS}`
     rm -f "${PIDFILE_LOGISTICS}"
 }
 
 restart() {
     echo "stoping uwsgi..."
     if [ -e "${PIDFILE_LOGISTICS}" ]; then
-        #kill -INT `cat $PIDFILE_LOGISTICS` ##not work
-        pid=`cat ${PIDFILE_LOGISTICS}`
+        kill -INT `cat ${PIDFILE_LOGISTICS}` 
         # kill the master process
-        # can not use the 'pkill' or 'killall'
-        # otherwise terminate the execute of script
-        kill -9 $pid
+        # can not use the 'pkill' or 'killall' here
+        # otherwise will terminate the execute of script
         rm -f "${PIDFILE_LOGISTICS}"
     else
         echo "uwsgi stop failed: uwsgi have not started"
@@ -64,7 +63,7 @@ reload() {
        return
     fi
 
-    kill -HUP `cat $PIDFILE_LOGISTICS`
+    kill -HUP `cat ${PIDFILE_LOGISTICS}`
 }
 
 # See how we were called.
@@ -82,5 +81,5 @@ case "$1" in
         reload
         ;;
     *)
-        echo $"Usage: serivce $name {start|stop|restart|reload}"
+        echo $"Usage: serivce $NAME {start|stop|restart|reload}"
 esac 
