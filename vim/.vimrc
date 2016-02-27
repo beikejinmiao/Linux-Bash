@@ -2,13 +2,21 @@ set nocompatible
 filetype on
 syntax on
 :filetype indent on
-set et
-set ci
-set shiftwidth=4
 set number
 
-:set ts=4
-set expandtab
+"AUTO INDENT set 
+set autoindent  "ai
+set cindent     "Auto indent type of C
+
+"TAB set
+set tabstop=4       "The width of a TAB is set to 4.
+                    " Still it is a \t. It is just that
+                    " Vim will interpret it to be having
+                    " a width of 4
+set shiftwidth=4    "Indents will have a width of 4
+"set softtabstop=4	"detele 4 chars when set `expandtab` on
+set noexpandtab     "Not expand TABs to spaces
+
 :%retab!
 :set modifiable
 
