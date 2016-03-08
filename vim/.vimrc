@@ -6,7 +6,8 @@ set number
 
 "AUTO INDENT set 
 set autoindent  "ai
-set cindent     "Auto indent type of C
+"set cindent     "Auto indent type of C
+set smartindent
 
 "TAB set
 set tabstop=4       "The width of a TAB is set to 4.
@@ -15,7 +16,7 @@ set tabstop=4       "The width of a TAB is set to 4.
                     " a width of 4
 set shiftwidth=4    "Indents will have a width of 4
 "set softtabstop=4	"detele 4 chars when set `expandtab` on
-set noexpandtab     "Not expand TABs to spaces
+set expandtab     "Expand TABs to spaces
 
 :%retab!
 :set modifiable
